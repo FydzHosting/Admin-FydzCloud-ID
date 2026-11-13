@@ -185,9 +185,9 @@
     const ADMIN_USER = "Fydz";
     const ADMIN_PASS = "FydzBL01";
 
-    // Konfigurasi JSONBin (Web Admin menggunakan Access Key dengan izin Update & Read)
+    // Konfigurasi Master Key untuk Web Admin
     const JSONBIN_BIN_ID = "6af71fbdac021005a852684";
-    const JSONBIN_SECRET_KEY = "$2a$10$/.gygM1.uzeJXyEns9Zaqe7VnA2ZHuOlr6TqVT9eUL2Ccy.L9FHhq";
+    const JSONBIN_SECRET_KEY = "$2a$10$7URRKGPRG/YT/RSdWHDvCuyZx2u0IBQRR4cnvD6UA/8MWNZ2qL46O";
 
     let remoteDataCache = {
       maintenance: false,
@@ -198,7 +198,7 @@
     async function fetchRemoteData() {
       try {
         let res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-          headers: { 'X-Access-Key': JSONBIN_SECRET_KEY }
+          headers: { 'X-Master-Key': JSONBIN_SECRET_KEY }
         });
         if (res.ok) {
           let json = await res.json();
@@ -216,7 +216,7 @@
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'X-Access-Key': JSONBIN_SECRET_KEY
+            'X-Master-Key': JSONBIN_SECRET_KEY
           },
           body: JSON.stringify(remoteDataCache)
         });
